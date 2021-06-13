@@ -1,4 +1,4 @@
-package com.example.notes.Models;
+package com.example.notes.models;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
@@ -10,7 +10,7 @@ import androidx.room.Update;
 import java.util.List;
 
 @Dao
-public interface ToDoDao {
+public interface TODODao {
 
     @Insert
     void insert(TODO todo);

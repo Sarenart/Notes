@@ -1,4 +1,4 @@
-package com.example.notes.Models;
+package com.example.notes.models;
 import androidx.databinding.BaseObservable;
 import androidx.databinding.Bindable;
 import androidx.databinding.library.baseAdapters.BR;

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <data>
+        <variable
+            name="todo"
+            type="com.example.notes.models.TODO" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="4dp"
+        android:background="@drawable/border"
+        android:layout_margin="4dp">
+
+
+        <LinearLayout
+
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="4dp"
+            >
+
+            <TextView
+                android:id="@+id/titleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{todo.title}"
+                android:textSize="24dp"
+                android:textStyle="bold"
+
+                />
+
+            <TextView
+                android:id="@+id/descriptionTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:textSize="16dp"
+
+                android:text="@{todo.description}"
+
+                />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>

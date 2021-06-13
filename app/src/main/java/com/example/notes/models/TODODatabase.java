@@ -1,4 +1,4 @@
-package com.example.notes.Models;
+package com.example.notes.models;
 
 import android.content.Context;
 import android.os.AsyncTask;
@@ -14,7 +14,7 @@ public abstract class TODODatabase extends RoomDatabase {
 
     private static TODODatabase instance;
 
-    public abstract ToDoDao getToDoDao();
+    public abstract TODODao getToDoDao();
 
     public static synchronized TODODatabase getInstance(Context context){
         if(instance == null){
@@ -36,7 +36,7 @@ public abstract class TODODatabase extends RoomDatabase {
     };
 
     private static class InitialDataAsyncTask extends AsyncTask<Void, Void, Void> {
-        private ToDoDao todoDao;
+        private TODODao todoDao;
 
         public InitialDataAsyncTask(TODODatabase db){
             todoDao = db.getToDoDao();
@@ -44,6 +44,19 @@ public abstract class TODODatabase extends RoomDatabase {
 
         @Override
         protected  Void doInBackground(Void...voids){
+            TODO checkMemes = new TODO();
+            checkMemes.setId(1);
+            checkMemes.setTitle("Посмотреть мемы со Шлёппой");
+            checkMemes.setDescription("Шлёппа смешной. Каракалы смешные. Хочу каралака.");
+
+            TODO progressWithStudy = new TODO();
+            progressWithStudy.setId(1);
+            progressWithStudy.setTitle("Посмотреть архитектуру Android");
+            progressWithStudy.setDescription("Архитектурный подход очень сильно напоминает работу с Entity Framework и 3-хслойной архитектурой на третьем курсе. Хотя WPF было немного проще в освоении, MVVM в Android тоже не слишком сложный.");
+
+            todoDao.insert(checkMemes);
+            todoDao.insert(progressWithStudy);
+
             return null;
         }
     }
