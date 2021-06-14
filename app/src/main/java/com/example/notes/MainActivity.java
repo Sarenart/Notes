@@ -1,10 +1,12 @@
 package com.example.notes;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -32,9 +34,11 @@ public class MainActivity extends AppCompatActivity {
     private TODOAdapter todoAdapter;
     //private int selectedTodoId;
 
+    public static final int RESULT_UPDATE = 333;
+
     public static final int ADD_TODO_CODE = 0;
     public static final int EDIT_TODO_CODE = 1;
-
+    public static final int REVIEW_TODO = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,8 +81,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerView = activityMainBinding.todoRecyclerView;
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
+
         todoAdapter = new TODOAdapter();
         todoAdapter.setTodoArrayList(todoArrayList);
+
         recyclerView.setAdapter(todoAdapter);
         todoAdapter.setOnItemClickListener(new TODOAdapter.onItemClickListener() {
             @Override
@@ -88,9 +94,23 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(AddEditActivity.TODO_TITLE, todo.getTitle());
                 intent.putExtra(AddEditActivity.TODO_DESCRIPTION, todo.getDescription());
                 intent.putExtra(AddEditActivity.TODO_ID, todo.getId());
-                startActivity(intent);
+
+                startActivityForResult(intent, REVIEW_TODO);
             }
         });
+
+        new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
+            @Override
+            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull  RecyclerView.ViewHolder target) {
+                return false;
+            }
+
+            @Override
+            public void onSwiped(@NonNull  RecyclerView.ViewHolder viewHolder, int direction) {
+                TODO todo = todoArrayList.get(viewHolder.getAdapterPosition());
+                mainActivityViewModel.delete(todo);
+            }
+        }).attachToRecyclerView(recyclerView);
     }
 
     public class MainActivityClickHandlers {
@@ -112,17 +132,46 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode){
+        case ADD_TODO_CODE:
+            if (resultCode == RESULT_OK) {
+                TODO todo = new TODO();
+                todo.setDescription(data.getStringExtra(AddEditActivity.TODO_DESCRIPTION));
+                todo.setTitle(data.getStringExtra(AddEditActivity.TODO_TITLE));
 
-        if(requestCode == ADD_TODO_CODE && resultCode == RESULT_OK){
-            TODO todo = new TODO();
-            todo.setDescription(data.getStringExtra(AddEditActivity.TODO_DESCRIPTION));
-            todo.setTitle(data.getStringExtra(AddEditActivity.TODO_TITLE));
+                mainActivityViewModel.add(todo);
+            }
+        case EDIT_TODO_CODE:
+            if (resultCode == RESULT_OK) {
 
-            mainActivityViewModel.add(todo);
-        }
+                TODO todo = new TODO();
 
-        else if(requestCode == ADD_TODO_CODE && resultCode == RESULT_OK){
+                todo.setId(data.getIntExtra(AddEditActivity.TODO_ID, -1));
+                todo.setTitle(data.getStringExtra(AddEditActivity.TODO_TITLE));
+                todo.setDescription(data.getStringExtra(AddEditActivity.TODO_DESCRIPTION));
 
-        }
+                mainActivityViewModel.update(todo);
+            }
+
+        case REVIEW_TODO:
+            if (resultCode == RESULT_UPDATE) {
+                Intent intent;
+
+                TODO todo = new TODO();
+
+                todo.setId(data.getIntExtra(AddEditActivity.TODO_ID, -1));
+                todo.setTitle(data.getStringExtra(AddEditActivity.TODO_TITLE));
+                todo.setDescription(data.getStringExtra(AddEditActivity.TODO_DESCRIPTION));
+
+                intent = new Intent(MainActivity.this, AddEditActivity.class);
+
+                intent.putExtra(AddEditActivity.TODO_ID, todo.getId());
+                intent.putExtra(AddEditActivity.TODO_TITLE, todo.getTitle());
+                intent.putExtra(AddEditActivity.TODO_DESCRIPTION, todo.getDescription());
+
+                startActivityForResult(intent, EDIT_TODO_CODE);
+
+            }
+    }
     }
 }

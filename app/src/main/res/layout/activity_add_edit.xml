@@ -18,7 +18,7 @@
 
     <LinearLayout
         android:orientation="vertical"
-
+        android:padding="8dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".AddEditActivity">
@@ -30,6 +30,8 @@
             android:layout_marginTop="16dp"
             android:text="@={todo.title}"
             android:textSize="24sp"
+            android:background="@drawable/border"
+            android:padding="8dp"
             android:hint="Введите название"
             />
 
@@ -40,8 +42,41 @@
             android:text="@={todo.description}"
             android:layout_marginTop="16dp"
             android:textSize="16sp"
+            android:gravity="top"
+            android:padding="8dp"
             android:hint="Введите описание"
+            android:background="@drawable/border"
+            android:minHeight="400dp"
             />
+
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp">
+
+            <Button
+                android:id="@+id/uploadImageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Download Image"
+                android:onClick="@{addEditActivityClickHandler::onOkButtonClicked}"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:layout_margin="4dp"
+                android:layout_marginTop="20dp"
+                />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                android:src="@drawable/ic_launcher_foreground"
+            />
+        </LinearLayout>
 
         <Button
             android:id="@+id/okButton"
@@ -54,7 +89,6 @@
             android:layout_margin="4dp"
             android:layout_marginTop="20dp"
             />
-
     </LinearLayout>
 
 </layout>
