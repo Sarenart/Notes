@@ -32,11 +32,13 @@ public class ShowTODOActivity extends AppCompatActivity {
         selectedTodo.setId(intent.getIntExtra(AddEditActivity.TODO_ID, -1));
         selectedTodo.setTitle(intent.getStringExtra(AddEditActivity.TODO_TITLE));
         selectedTodo.setDescription(intent.getStringExtra(AddEditActivity.TODO_DESCRIPTION));
-        //int id = intent.getIntExtra(AddEditActivity.TODO_ID, 0);
+        selectedTodo.setUri(intent.getStringExtra(AddEditActivity.TODO_URI));
+
 
         showTODOClickHandlers = new ShowTODOClickHandlers(this);
 
         activityShowTodoactivityBinding.setTodo(selectedTodo);
+
         activityShowTodoactivityBinding.setShowTODOClickHandler(showTODOClickHandlers);
 
     }
@@ -54,6 +56,7 @@ public class ShowTODOActivity extends AppCompatActivity {
             intent.putExtra(AddEditActivity.TODO_TITLE, selectedTodo.getTitle());
             intent.putExtra(AddEditActivity.TODO_DESCRIPTION, selectedTodo.getDescription());
             intent.putExtra(AddEditActivity.TODO_ID, selectedTodo.getId());
+            intent.putExtra(AddEditActivity.TODO_URI, selectedTodo.getUri());
 
             setResult(MainActivity.RESULT_UPDATE, intent);
             finish();

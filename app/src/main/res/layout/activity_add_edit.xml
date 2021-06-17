@@ -32,7 +32,7 @@
             android:textSize="24sp"
             android:background="@drawable/border"
             android:padding="8dp"
-            android:hint="Введите название"
+            android:hint="Enter Title"
             />
 
         <EditText
@@ -44,24 +44,27 @@
             android:textSize="16sp"
             android:gravity="top"
             android:padding="8dp"
-            android:hint="Введите описание"
+            android:hint="Enter description"
             android:background="@drawable/border"
-            android:minHeight="400dp"
+            android:minHeight="200dp"
             />
 
 
-        <LinearLayout
-            android:orientation="horizontal"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp">
+            android:padding="16dp">
 
-            <Button
-                android:id="@+id/uploadImageButton"
+            <TextView
+                android:id="@+id/downloadImageTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Download Image"
-                android:onClick="@{addEditActivityClickHandler::onOkButtonClicked}"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/addImageView"
                 android:textSize="24sp"
                 android:gravity="center"
                 android:layout_margin="4dp"
@@ -69,14 +72,26 @@
                 />
 
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/addImageView"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_margin="4dp"
-                android:scaleType="fitXY"
+                android:padding="2dp"
+                android:scaleType="fitCenter"
+                android:background="@drawable/border"
                 android:adjustViewBounds="true"
-                android:src="@drawable/ic_launcher_foreground"
-            />
-        </LinearLayout>
+                android:src="@drawable/add_image"
+                app:layout_constraintTop_toBottomOf="@id/downloadImageTitle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="@{addEditActivityClickHandler::onAddImageButtonClicked}"
+                app:url="@{todo.uri}"
+                app:error="@{@drawable/error}"
+                app:placeholder="@{@drawable/add_image}"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
             android:id="@+id/okButton"

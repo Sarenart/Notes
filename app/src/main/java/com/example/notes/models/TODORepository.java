@@ -14,7 +14,7 @@ public class TODORepository {
 
     public TODORepository(Application application){
         TODODatabase todoDb = TODODatabase.getInstance(application);
-        todoDao = todoDb.getToDoDao();
+        todoDao = todoDb.getTODODao();
     }
 
     public LiveData<List<TODO>> getAll(){

@@ -21,7 +21,7 @@ public interface TODODao {
     @Delete
     void delete(TODO todo);
 
-    @Query("select * from ToDo_table")
+    @Query("select * from TODO_table")
     LiveData<List<TODO>> getAll();
 
 }

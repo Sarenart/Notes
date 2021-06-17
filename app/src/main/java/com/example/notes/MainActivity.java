@@ -26,6 +26,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+//TODO Improve UI
+
     private MainActivityViewModel mainActivityViewModel;
     private ActivityMainBinding activityMainBinding;
     private MainActivityClickHandlers mainActivityClickHandlers;
@@ -67,7 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
     private void loadTodosInArrayList(){
         mainActivityViewModel.getAll().observe(this, new Observer<List<TODO>>() {
             @Override
@@ -94,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 intent.putExtra(AddEditActivity.TODO_TITLE, todo.getTitle());
                 intent.putExtra(AddEditActivity.TODO_DESCRIPTION, todo.getDescription());
                 intent.putExtra(AddEditActivity.TODO_ID, todo.getId());
+                intent.putExtra(AddEditActivity.TODO_URI, todo.getUri());
 
                 startActivityForResult(intent, REVIEW_TODO);
             }
@@ -113,22 +115,6 @@ public class MainActivity extends AppCompatActivity {
         }).attachToRecyclerView(recyclerView);
     }
 
-    public class MainActivityClickHandlers {
-        Context context;
-
-        public MainActivityClickHandlers(Context context) {
-            this.context = context;
-        }
-
-        public void onAddGoalClicked(View view){
-            Log.d("WORKWORK", "ItsWorking");
-           // Toast.makeText(context, "Add goal is clicked", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(MainActivity.this, AddEditActivity.class);
-            startActivityForResult(intent, ADD_TODO_CODE);
-        }
-
-    }
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -138,6 +124,7 @@ public class MainActivity extends AppCompatActivity {
                 TODO todo = new TODO();
                 todo.setDescription(data.getStringExtra(AddEditActivity.TODO_DESCRIPTION));
                 todo.setTitle(data.getStringExtra(AddEditActivity.TODO_TITLE));
+                todo.setUri(data.getStringExtra(AddEditActivity.TODO_URI));
 
                 mainActivityViewModel.add(todo);
             }
@@ -149,6 +136,7 @@ public class MainActivity extends AppCompatActivity {
                 todo.setId(data.getIntExtra(AddEditActivity.TODO_ID, -1));
                 todo.setTitle(data.getStringExtra(AddEditActivity.TODO_TITLE));
                 todo.setDescription(data.getStringExtra(AddEditActivity.TODO_DESCRIPTION));
+                todo.setUri(data.getStringExtra(AddEditActivity.TODO_URI));
 
                 mainActivityViewModel.update(todo);
             }
@@ -162,16 +150,39 @@ public class MainActivity extends AppCompatActivity {
                 todo.setId(data.getIntExtra(AddEditActivity.TODO_ID, -1));
                 todo.setTitle(data.getStringExtra(AddEditActivity.TODO_TITLE));
                 todo.setDescription(data.getStringExtra(AddEditActivity.TODO_DESCRIPTION));
+                todo.setUri(data.getStringExtra(AddEditActivity.TODO_URI));
 
                 intent = new Intent(MainActivity.this, AddEditActivity.class);
 
                 intent.putExtra(AddEditActivity.TODO_ID, todo.getId());
                 intent.putExtra(AddEditActivity.TODO_TITLE, todo.getTitle());
                 intent.putExtra(AddEditActivity.TODO_DESCRIPTION, todo.getDescription());
+                intent.putExtra(AddEditActivity.TODO_URI, todo.getUri());
 
                 startActivityForResult(intent, EDIT_TODO_CODE);
 
             }
+        }
     }
+
+    public class MainActivityClickHandlers {
+        Context context;
+
+        public MainActivityClickHandlers(Context context) {
+            this.context = context;
+        }
+
+        public void onAddGoalClicked(View view){
+            Log.d("WORKWORK", "ItsWorking");
+            // Toast.makeText(context, "Add goal is clicked", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(MainActivity.this, AddEditActivity.class);
+            startActivityForResult(intent, ADD_TODO_CODE);
+        }
+
+        public void onFloatingButtonClicked(View view){
+            Toast.makeText(MainActivity.this ,"I am to replace Add TODO later", Toast.LENGTH_LONG).show();
+        }
+
     }
+
 }

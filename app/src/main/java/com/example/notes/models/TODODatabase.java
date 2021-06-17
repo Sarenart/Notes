@@ -9,12 +9,14 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@Database(entities = {TODO.class}, version = 1)
+import com.example.notes.AddEditActivity;
+
+@Database(entities = {TODO.class}, version = 2)
 public abstract class TODODatabase extends RoomDatabase {
 
     private static TODODatabase instance;
 
-    public abstract TODODao getToDoDao();
+    public abstract TODODao getTODODao();
 
     public static synchronized TODODatabase getInstance(Context context){
         if(instance == null){
@@ -39,11 +41,11 @@ public abstract class TODODatabase extends RoomDatabase {
         private TODODao todoDao;
 
         public InitialDataAsyncTask(TODODatabase db){
-            todoDao = db.getToDoDao();
+            todoDao = db.getTODODao();
         }
 
         @Override
-        protected  Void doInBackground(Void...voids){
+        protected Void doInBackground(Void...voids){
             TODO checkMemes = new TODO();
             checkMemes.setId(1);
             checkMemes.setTitle("Посмотреть мемы со Шлёппой");
@@ -52,7 +54,7 @@ public abstract class TODODatabase extends RoomDatabase {
             TODO progressWithStudy = new TODO();
             progressWithStudy.setId(1);
             progressWithStudy.setTitle("Посмотреть архитектуру Android");
-            progressWithStudy.setDescription("Архитектурный подход очень сильно напоминает работу с Entity Framework и 3-хслойной архитектурой на третьем курсе. Хотя WPF было немного проще в освоении, MVVM в Android тоже не слишком сложный.");
+            progressWithStudy.setDescription("Архитектурный подход очень сильно напоминает работу с Entity Framework и 3-хслойной архитектурой на третьем курсе. Хотя WPF был немного проще в освоении, MVVM в Android тоже не слишком сложный.");
 
             todoDao.insert(checkMemes);
             todoDao.insert(progressWithStudy);
