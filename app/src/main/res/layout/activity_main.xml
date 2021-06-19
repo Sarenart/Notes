@@ -20,35 +20,19 @@
         android:padding="4dp"
         tools:context=".MainActivity">
 
-        <Button
-            android:id="@+id/AddGoalButton"
-            android:layout_width="wrap_content"
-            android:layout_height="0dp"
-            android:onClick="@{mainActivityClickHandlers::onAddGoalClicked}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintHorizontal_bias="0.95"
-            app:layout_constraintWidth_min="30dp"
-            android:textSize="16sp"
-            android:text="Add TODO"
-            android:bottomRightRadius="30dp"
-            android:bottomLeftRadius="30dp"
-            android:topLeftRadius="30dp"
-            android:topRightRadius="30dp"
-        />
+
 
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
-            android:text="TODO:"
+            android:text="@string/TODO"
             android:textSize="26sp"
             app:layout_constraintHorizontal_bias="0.45"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/AddGoalButton" />
+            app:layout_constraintTop_toTopOf="parent" />
 
 
             <androidx.recyclerview.widget.RecyclerView
@@ -67,11 +51,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity = "bottom|end"
-                android:contentDescription="NoPurrpose"
                 android:onClick="@{mainActivityClickHandlers::onFloatingButtonClicked}"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                android:layout_margin="8dp"/>
+                android:layout_margin="12dp"
+                app:srcCompat = "@android:drawable/ic_input_add"/>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -32,7 +32,7 @@
             android:textSize="24sp"
             android:background="@drawable/border"
             android:padding="8dp"
-            android:hint="Enter Title"
+            android:hint="@string/enter_title"
             />
 
         <EditText
@@ -44,7 +44,7 @@
             android:textSize="16sp"
             android:gravity="top"
             android:padding="8dp"
-            android:hint="Enter description"
+            android:hint="@string/enter_description"
             android:background="@drawable/border"
             android:minHeight="200dp"
             />
@@ -60,7 +60,7 @@
                 android:id="@+id/downloadImageTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Download Image"
+                android:text="@string/download_image"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

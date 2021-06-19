@@ -173,14 +173,16 @@ public class MainActivity extends AppCompatActivity {
         }
 
         public void onAddGoalClicked(View view){
-            Log.d("WORKWORK", "ItsWorking");
+            //Log.d("WORKWORK", "ItsWorking");
             // Toast.makeText(context, "Add goal is clicked", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(MainActivity.this, AddEditActivity.class);
             startActivityForResult(intent, ADD_TODO_CODE);
         }
 
         public void onFloatingButtonClicked(View view){
-            Toast.makeText(MainActivity.this ,"I am to replace Add TODO later", Toast.LENGTH_LONG).show();
+            //Toast.makeText(MainActivity.this ,"I am to replace Add TODO later", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(MainActivity.this, AddEditActivity.class);
+            startActivityForResult(intent, ADD_TODO_CODE);
         }
 
     }

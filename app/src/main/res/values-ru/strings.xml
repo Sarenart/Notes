@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Notes</string>
+    <string name="TODO">Задачи</string>
+    <string name="enter_title">Введите заголовок</string>
+    <string name="enter_description">Введите описание</string>
+    <string name="download_image">Загрузите картинку</string>
+    <string name="add_todo">Добавить задачу</string>
+    <string name="edit_todo">Редактировать задачу</string>
+</resources>

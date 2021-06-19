@@ -64,7 +64,7 @@ public class AddEditActivity extends AppCompatActivity {
 
         if(intent.hasExtra(TODO_ID)){
 
-            setTitle("Edit TODO");
+            setTitle(R.string.edit_todo);
 
             todo.setId(intent.getIntExtra(TODO_ID, 0));
             todo.setTitle(intent.getStringExtra(TODO_TITLE));
@@ -73,7 +73,7 @@ public class AddEditActivity extends AppCompatActivity {
 
         }
         else{
-            setTitle("Add TODO");
+            setTitle(R.string.add_todo);
         }
         activityAddEditBinding.setTodo(todo);
 

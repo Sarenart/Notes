@@ -69,7 +69,7 @@
             android:layout_margin="8dp"
             android:textSize="16sp"
             android:onClick="@{showTODOClickHandler::onEditButtonClicked}"
-            android:text="Edit TODO"
+            android:text="@string/edit_todo"
 
             />
 
